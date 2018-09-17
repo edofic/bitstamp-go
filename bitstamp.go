@@ -23,8 +23,6 @@ var _url string = "https://www.bitstamp.net/api/v2"
 
 type ErrorResult struct {
 	Status string `json:"status,string"`
-	Reason string `json:"reason,string"`
-	Code   string `json:"code,string"`
 }
 
 type AccountBalanceResult struct {
@@ -194,7 +192,7 @@ func privateQuery(path string, values url.Values, v interface{}) error {
 	err_result := ErrorResult{}
 	json.Unmarshal(body, &err_result)
 	if err_result.Status == "error" {
-		return fmt.Errorf("%#v", err_result)
+		return fmt.Errorf("%#v", body)
 	}
 
 	if _debug {
